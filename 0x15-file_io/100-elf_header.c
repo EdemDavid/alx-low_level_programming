@@ -7,7 +7,7 @@
 /**
 * confirm - Checks if file is a ELF
 * @id_byte: ELF struct
-* return: 0
+* Return: 0
 */
 
 void confirm(unsigned char *id_byte)
@@ -27,25 +27,25 @@ void confirm(unsigned char *id_byte)
 /**
 * abra - Prints magical number
 * @id_byte: ELF struct
-* return: 0
+* Return: 0
 */
 
 void abra(unsigned char *id_byte)
 {
-	int i;
-	int limit;
+	int a;
+	int lim;
 
 	limit = EI_NIDENT - 1;
 	printf("  Magic:   ");
-	for (i = 0; i < limit; i++)
-		printf("%02x ", *(id_byte + i));
-	printf("%02x\n", *(id_byte + i));
+	for (a = 0; a < lim; a++)
+		printf("%02x ", *(id_byte + a));
+	printf("%02x\n", *(id_byte + a));
 }
 
 /**
 * level - Prints the ELF class
 * @id_byte: ELF struct
-* return: 0
+* Return: 0
 */
 
 void level(unsigned char *id_byte)
@@ -64,7 +64,7 @@ void level(unsigned char *id_byte)
 /**
 * type - Prints the respective data type
 * @id_byte: ELF struct
-* return: 0
+* Return: 0
 */
 
 void type(unsigned char *id_byte)
@@ -83,7 +83,7 @@ void type(unsigned char *id_byte)
 /**
 * design - Prints the file version
 * @id_byte: ELF struct
-* return: 0
+* Return: 0
 */
 
 void design(unsigned char *id_byte)
@@ -98,8 +98,9 @@ void design(unsigned char *id_byte)
 /**
  * bin_int - Prints the OSABI
  * @id_byte: ELF struct
- * return: 0
+ * Return: 0
  */
+
 void bin_int(unsigned char *id_byte)
 {
 	printf("  OS/ABI:                            ");
@@ -130,8 +131,8 @@ void bin_int(unsigned char *id_byte)
 /**
 * dtype - Prints the respective type
 * @id_byte: ELF struct
-* @e_type: data to compare and print.
-* return: 0
+* @e_type: Data to be compared and printed
+* Return: 0
 */
 
 void dtype(unsigned int e_type, unsigned char *id_byte)
@@ -156,8 +157,8 @@ void dtype(unsigned int e_type, unsigned char *id_byte)
 /**
 * ent - Prints the point of entry
 * @id_byte: ELF struct
-* @e_entry: the data to print
-* return: 0
+* @e_entry: Data to be printed
+* Return: 0
 */
 
 void ent(unsigned int e_entry, unsigned char *id_byte)
@@ -170,16 +171,15 @@ void ent(unsigned int e_entry, unsigned char *id_byte)
 }
 
 /**
-* main - read a ELF file.
-* @argc: the number of args
-* @argv: the Args
-* section header: the header of this function is holberton.h
+* main - Reads ELF
+* @argc: Argument number
+* @argv: Argument
 * Return: 0
 */
 
 int main(int argc, char *argv[])
 {
-	int fd, _read, _close;
+	int fd, re, cl;
 	Elf64_Ehdr *file;
 
 	if (argc > 2 || argc < 2)
@@ -193,8 +193,8 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", *(argv + 1));
 		exit(98);
 	}
-	_read = read(fd, file, sizeof(Elf64_Ehdr));
-	if (_read == -1)
+	re = read(fd, file, sizeof(Elf64_Ehdr));
+	if (re == -1)
 	{
 		free(file);
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", *(argv + 1));
@@ -209,10 +209,10 @@ int main(int argc, char *argv[])
 	printf("  ABI Version:                       ");
 	printf("%i\n", file->id_byte[EI_ABIVERSION]);
 	dtype(file->e_type, file->id_byte);
-	entry(file->e_entry, file->id_byte);
+	ent(file->e_entry, file->id_byte);
 	free(file);
-	_close = close(fd);
-	if (_close)
+	cl = close(fd);
+	if (cl)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd\n");
 		exit(98);
