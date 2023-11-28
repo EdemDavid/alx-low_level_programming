@@ -203,16 +203,16 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", *(argv + 1));
 		exit(98);
 	}
-	confirm(file->id_byte);
-	abra(file->id_byte);
-	level(file->id_byte);
-	type(file->id_byte);
-	design(file->id_byte);
-	bin_int(file->id_byte);
+	confirm(file->e_ident);
+	abra(file->e_ident);
+	level(file->e_ident);
+	type(file->e_ident);
+	design(file->e_ident);
+	bin_int(file->e_ident);
 	printf("  ABI Version:                       ");
-	printf("%i\n", file->id_byte[EI_ABIVERSION]);
-	dtype(file->e_type, file->id_byte);
-	ent(file->e_entry, file->id_byte);
+	printf("%i\n", file->e_ident[EI_ABIVERSION]);
+	dtype(file->e_type, file->e_ident);
+	ent(file->e_entry, file->e_ident);
 	free(file);
 	cl = close(fd);
 	if (cl)
