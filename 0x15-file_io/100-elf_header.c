@@ -2,8 +2,11 @@
 #include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
 #define REVIT(p) ((p << 24) | (((p >> 16) << 24) >> 16) | \
 (((p << 16) >> 24) << 16) | (p >> 24))
+
 /**
 * confirm - Checks if file is a ELF
 * @id_byte: ELF struct
