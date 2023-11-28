@@ -38,7 +38,7 @@ void abra(unsigned char *id_byte)
 	int a;
 	int lim;
 
-	limit = EI_NIDENT - 1;
+	lim = EI_NIDENT - 1;
 	printf("  Magic:   ");
 	for (a = 0; a < lim; a++)
 		printf("%02x ", *(id_byte + a));
